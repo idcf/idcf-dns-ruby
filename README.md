@@ -1,4 +1,6 @@
 # Idcf::Dns
+[![Gem Version](https://badge.fury.io/rb/idcf-dns.svg)](http://badge.fury.io/rb/idcf-dns)
+[![Build Status](https://travis-ci.org/idcf/idcf-dns-ruby.svg)](https://travis-ci.org/idcf/idcf-dns-ruby)
 
 A Ruby client for IDCF Cloud DNS service.
 

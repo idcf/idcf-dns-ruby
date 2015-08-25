@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["nownabe@gmail.com"]
 
   spec.summary       = %q{A Ruby client for IDCF Cloud DNS Service.}
-  spec.homepage      = "https://github.com/idcf/ruby-idcf-dns"
+  spec.homepage      = "https://github.com/idcf/idcf-dns-ruby"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"

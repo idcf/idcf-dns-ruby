@@ -125,7 +125,7 @@ client.list_zones("X-IDCF-Expires": expiration)
 ```
 
 ### API reference
-URL
+http://www.rubydoc.info/gems/idcf-dns
 
 ## Contributing
 

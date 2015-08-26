@@ -116,6 +116,9 @@ client.delete_record(record_uuid, zone_uuid)
 
 ### Advanced usage
 #### Custom expiration of requests 
+In default, requests will expire in 600 seconds.
+You can use custom expirations for each request.
+
 ```ruby
 expiration = Time.now.to_i + 10
 

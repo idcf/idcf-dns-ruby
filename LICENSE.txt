@@ -1,4 +1,4 @@
-Copyright (c) 2015 nownabe
+Copyright (c) 2015 IDC Frontier Inc.
 
 MIT License
 

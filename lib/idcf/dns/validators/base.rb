@@ -14,24 +14,10 @@ module Idcf
           # @param attributes [Hash] request attributes
           # @param action [Symbol] request method
           def validate_attributes!(attributes, action = nil)
-            required_attributes(action).each do |name|
-              unless attributes.key?(name)
-                fail(
-                  MissingAttribute,
-                  "`#{name}` is required in #{action} action"
-                )
-              end
-            end
+            validate_presence!(attributes, action)
+            validate_absence!(attributes, action)
             attributes.each do |name, value|
-              if action &&
-                  (!valid_attributes[name] || !valid_attributes[name][action])
-                fail(
-                  UnnecessaryAttribute,
-                  "`#{name}` is unnecessary in #{action} action"
-                )
-              end
-              validate_attribute_name!(name)
-              validate_attribute_type!(name, value)
+              validate_attribute!(name, value)
             end
           end
 
@@ -59,6 +45,23 @@ module Idcf
             end
           end
 
+          def validate_absence!(attributes, action)
+            attributes.each do |name, value|
+              if action &&
+                  (!valid_attributes[name] || !valid_attributes[name][action])
+                fail(
+                  UnnecessaryAttribute,
+                  "`#{name}` is unnecessary in #{action} action"
+                )
+              end
+            end
+          end
+
+          def validate_attribute!(name, value)
+            validate_attribute_name!(name)
+            validate_attribute_type!(name, value)
+          end
+
           def validate_attribute_name!(name)
             return true if valid_attributes.key?(name.to_sym)
             fail(
@@ -74,6 +77,17 @@ module Idcf
               InvalidAttributeType,
               "`#{name}` is required to be a #{valid_type}"
             )
+          end
+
+          def validate_presence!(attributes, action)
+            required_attributes(action).each do |name|
+              unless attributes.key?(name)
+                fail(
+                  MissingAttribute,
+                  "`#{name}` is required in #{action} action"
+                )
+              end
+            end
           end
         end
       end

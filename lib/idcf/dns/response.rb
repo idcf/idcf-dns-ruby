@@ -32,11 +32,7 @@ module Idcf
         when Array
           body.size
         when Hash
-          if body.key?("uuid")
-            1
-          else
-            0
-          end
+          body.key?("uuid") ? 1 : 0
         else
           0
         end

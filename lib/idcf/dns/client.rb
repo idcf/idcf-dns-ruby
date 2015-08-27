@@ -55,7 +55,7 @@ module Idcf
       # @param headers [Hash] HTTP request headers
       # @return [Response] Response object
       def delete!(resource, parameters = {}, headers = {})
-        send_with_handling_error(:delete, resource, parameters, headers)
+        send!(:delete, resource, parameters, headers)
       end
 
       # Send GET request
@@ -75,7 +75,7 @@ module Idcf
       # @param headers [Hash] HTTP request headers
       # @return [Response] Response object
       def get!(resource, parameters = {}, headers = {})
-        send_with_handling_error(:get, resource, parameters, headers)
+        send!(:get, resource, parameters, headers)
       end
 
       # Send POST request
@@ -95,7 +95,7 @@ module Idcf
       # @param headers [Hash] HTTP request headers
       # @return [Response] Response object
       def post!(resource, parameters = {}, headers = {})
-        send_with_handling_error(:post, resource, parameters, headers)
+        send!(:post, resource, parameters, headers)
       end
 
       # Send PUT request
@@ -115,7 +115,7 @@ module Idcf
       # @param headers [Hash] HTTP request headers
       # @return [Response] Response object
       def put!(resource, parameters = {}, headers = {})
-        send_with_handling_error(:put, resource, parameters, headers)
+        send!(:put, resource, parameters, headers)
       end
 
       private
@@ -124,7 +124,7 @@ module Idcf
         Request.new(self, method, resource, parameters, headers).send
       end
 
-      def send_with_handling_error(method, resource, parameters = {}, headers = {})
+      def send!(method, resource, parameters = {}, headers = {})
         response = send(method, resource, parameters, headers)
         unless response.success?
           fail(

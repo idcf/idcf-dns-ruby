@@ -18,6 +18,7 @@ end
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'idcf/dns'
 
+PREFIX = rand(16**8).to_s(16)
 ZONES = []
 TEMPLATES = []
 
@@ -48,7 +49,7 @@ shared_context "resources" do
 
   def zone_attributes(attributes = {})
     {
-      name: "rspec-#{ZONES.size}.idcf-dns-ruby.jp",
+      name: "rspec-#{PREFIX}-#{ZONES.size}.idcf-dns-ruby.jp",
       email: "rspec@idcf-dns-ruby.jp",
       description: "For idcf-dns-ruby rspec",
       default_ttl: 600

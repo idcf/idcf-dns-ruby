@@ -34,12 +34,18 @@ client =
     secret_key: ENV["IDCF_SECRET_KEY"]
   )
 
+# Call GET request directly
+# returns Response object
 response = client.get("zones")
 response.success? #=> true
+response.status   #=> 200
+
+# Response#body returns HTTP response body as a hash or an array
 response.body     #=> [zone1, zone2, ...]
 response.body[0]  #=> zone1
+
+# Response#[] is alias to Response#body[]
 response[0]       #=> zone1
-response.status   #=> 200
 ```
 
 #### Zones

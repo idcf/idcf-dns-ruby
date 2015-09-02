@@ -20,7 +20,6 @@ require 'idcf/dns'
 
 PREFIX = rand(16**8).to_s(16)
 ZONES = []
-TEMPLATES = []
 
 auth_args = {
   api_key: ENV["IDCF_API_KEY"],
@@ -37,9 +36,6 @@ RSpec.configure do |config|
     client = Idcf::Dns::Client.new(auth_args)
     ZONES.reverse_each do |zone_uuid|
       client.delete_zone(zone_uuid)
-    end
-    TEMPLATES.reverse_each do |template_uuid|
-      client.delete_template(template_uuid)
     end
   end
 end
@@ -61,14 +57,6 @@ shared_context "resources" do
       type: "A",
       content: "8.8.8.8",
       ttl: 600
-    }.merge(attributes)
-  end
-
-  def template_attributes(attributes = {})
-    {
-      name: "rspec-#{TEMPLATES.size}.template",
-      description: "For idcf-dns-ruby rspec",
-      default_ttl: 600
     }.merge(attributes)
   end
 end

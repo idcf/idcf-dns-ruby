@@ -106,18 +106,18 @@ records = client.list_records(zone_uuid).body
 records[0]["name"] #=> "baz.foobar.example.com"
 
 # Get a record
-record = client.get_record(record_uuid, zone_uuid).body
+record = client.get_record(zone_uuid, record_uuid).body
 record["name"] #=> "baz.foobar.example.com"
 ```
 
 ##### Update record
 ```ruby
-client.update_record(record_uuid, zone_uuid, content: "210.140.158.1")
+client.update_record(zone_uuid, record_uuid, content: "210.140.158.1")
 ```
 
 ##### Delete record
 ```ruby
-client.delete_record(record_uuid, zone_uuid)
+client.delete_record(zone_uuid, record_uuid)
 ```
 
 ### Advanced usage

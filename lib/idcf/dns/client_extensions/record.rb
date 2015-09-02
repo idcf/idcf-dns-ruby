@@ -22,21 +22,21 @@ module Idcf
 
         # Delete a record.
         #
-        # @param uuid [String] UUID of record
         # @param zone_uuid [String] UUID of zone
+        # @param uuid [String] UUID of record
         # @param headers [Hash] HTTP request headers
         # @return [Response] HTTP response object
-        def delete_record(uuid, zone_uuid, headers = {})
+        def delete_record(zone_uuid, uuid, headers = {})
           delete!("zones/#{zone_uuid}/records/#{uuid}", {}, headers)
         end
 
         # Get a record.
         #
-        # @param uuid [String] UUID of record
         # @param zone_uuid [String] UUID of zone
+        # @param uuid [String] UUID of record
         # @param headers [Hash] HTTP request headers
         # @return [Response] HTTP response object
-        def get_record(uuid, zone_uuid, headers = {})
+        def get_record(zone_uuid, uuid, headers = {})
           get!("zones/#{zone_uuid}/records/#{uuid}", {}, headers)
         end
 
@@ -50,8 +50,8 @@ module Idcf
 
         # Update a record.
         #
-        # @param uuid [String] UUID of record
         # @param zone_uuid [String] UUID of zone
+        # @param uuid [String] UUID of record
         # @param attributes [Hash] request attributes
         # @option attributes [String] :name name of record
         # @option attributes [String] :type type of record
@@ -61,18 +61,18 @@ module Idcf
         # @option attributes [Integer] :priority priority of record
         # @param headers [Hash] HTTP request headers
         # @return [Response] HTTP response object
-        def update_record(uuid, zone_uuid, attributes, headers = {})
+        def update_record(zone_uuid, uuid, attributes, headers = {})
           Validators::Record.validate_attributes!(attributes, :update)
           put!("zones/#{zone_uuid}/records/#{uuid}", attributes, headers)
         end
 
         # Get a record object.
         #
-        # @param uuid [String] UUID of record
         # @param zone_uuid [String] UUID of zone
+        # @param uuid [String] UUID of record
         # @param headers [Hash] HTTP request headers
         # @return [Resources::Record] a record object
-        def record(uuid, zone_uuid, headers = {})
+        def record(zone_uuid, uuid, headers = {})
           Resources::Record.new(self, get_record(uuid, zone_uuid, headers).body)
         end
 

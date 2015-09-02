@@ -18,7 +18,7 @@ describe Idcf::Dns::ClientExtensions::Record do
   end
 
   describe "#delete_record" do
-    let(:response) { client.delete_record(uuid, zone_uuid) }
+    let(:response) { client.delete_record(zone_uuid, uuid) }
 
     context "when valid request" do
       let(:uuid) { client.create_record(zone_uuid, attributes).uuid }
@@ -31,7 +31,7 @@ describe Idcf::Dns::ClientExtensions::Record do
   end
 
   describe "#get_record" do
-    let(:response) { client.get_record(uuid, zone_uuid) }
+    let(:response) { client.get_record(zone_uuid, uuid) }
 
     context "when valid request" do
       let(:uuid) { client.create_record(zone_uuid, attributes).uuid }
@@ -59,7 +59,7 @@ describe Idcf::Dns::ClientExtensions::Record do
   end
 
   describe "#update_record" do
-    let(:response) { client.update_record(uuid, zone_uuid, update_attributes) }
+    let(:response) { client.update_record(zone_uuid, uuid, update_attributes) }
 
     context "when valid request" do
       let(:uuid) { client.create_record(zone_uuid, attributes).uuid }

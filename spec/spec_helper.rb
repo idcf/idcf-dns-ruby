@@ -4,6 +4,9 @@ SimpleCov.start do
   add_filter "spec"
 end
 
+# SimpleCov.minimum_coverage 90
+SimpleCov.minimum_coverage 85 # temporary setting
+
 if ENV["CI"]
   require "codeclimate-test-reporter"
   CodeClimate::TestReporter.start
@@ -15,8 +18,8 @@ if File.exist?(dotenv_path)
   Dotenv.load(dotenv_path)
 end
 
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'idcf/dns'
+$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
+require "idcf/dns"
 
 PREFIX = rand(16**8).to_s(16)
 ZONES = []

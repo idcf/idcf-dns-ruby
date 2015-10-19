@@ -3,7 +3,7 @@ describe Idcf::Dns::ClientExtensions::Record do
   before { ZONES << client.create_zone(zone_attributes).uuid }
   let(:zone_uuid) { ZONES.last }
   let(:zone) { client.get_zone(zone_uuid) }
-  let(:attributes) { record_attributes(name: "#{rand(16**8).to_s(16)}.#{zone["name"]}") }
+  let(:attributes) { record_attributes(name: "#{rand(16**8).to_s(16)}.#{zone['name']}") }
 
   describe "#create_record" do
     let(:response) { client.create_record(zone_uuid, attributes) }

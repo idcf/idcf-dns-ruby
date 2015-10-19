@@ -46,14 +46,13 @@ module Idcf
           end
 
           def validate_absence!(attributes, action)
+            return unless action
             attributes.each do |name, value|
-              if action &&
-                  (!valid_attributes[name] || !valid_attributes[name][action])
-                fail(
-                  UnnecessaryAttribute,
-                  "`#{name}` is unnecessary in #{action} action"
-                )
-              end
+              next unless !valid_attributes[name] || !valid_attributes[name][action]
+              raise(
+                UnnecessaryAttribute,
+                "`#{name}` is unnecessary in #{action} action"
+              )
             end
           end
 
@@ -64,7 +63,7 @@ module Idcf
 
           def validate_attribute_name!(name)
             return true if valid_attributes.key?(name.to_sym)
-            fail(
+            raise(
               InvalidAttributeName,
               "`#{name}` is invalid attribute name"
             )
@@ -73,7 +72,7 @@ module Idcf
           def validate_attribute_type!(name, value)
             valid_type = valid_attributes[name.to_sym][:type]
             return true if valid_attribute?(value, valid_type)
-            fail(
+            raise(
               InvalidAttributeType,
               "`#{name}` is required to be a #{valid_type}"
             )
@@ -81,12 +80,11 @@ module Idcf
 
           def validate_presence!(attributes, action)
             required_attributes(action).each do |name|
-              unless attributes.key?(name)
-                fail(
-                  MissingAttribute,
-                  "`#{name}` is required in #{action} action"
-                )
-              end
+              next if attributes.key?(name)
+              raise(
+                MissingAttribute,
+                "`#{name}` is required in #{action} action"
+              )
             end
           end
         end

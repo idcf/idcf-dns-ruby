@@ -4,6 +4,8 @@ SimpleCov.start do
   add_filter "spec"
 end
 
+SimpleCov.minimum_coverage 90
+
 if ENV["CI"]
   require "codeclimate-test-reporter"
   CodeClimate::TestReporter.start

@@ -1,6 +1,6 @@
 # Idcf::Dns
 [![Gem Version](https://badge.fury.io/rb/idcf-dns.svg)](http://badge.fury.io/rb/idcf-dns)
-[![Build Status](https://travis-ci.org/idcf/idcf-dns-ruby.svg)](https://travis-ci.org/idcf/idcf-dns-ruby)
+[![Build Status](https://travis-ci.org/idcf/idcf-dns-ruby.svg?branch=master)](https://travis-ci.org/idcf/idcf-dns-ruby)
 [![Code Climate](https://codeclimate.com/github/idcf/idcf-dns-ruby/badges/gpa.svg)](https://codeclimate.com/github/idcf/idcf-dns-ruby)
 [![Test Coverage](https://codeclimate.com/github/idcf/idcf-dns-ruby/badges/coverage.svg)](https://codeclimate.com/github/idcf/idcf-dns-ruby/coverage)
 
@@ -121,7 +121,7 @@ client.delete_record(zone_uuid, record_uuid)
 ```
 
 ### Advanced usage
-#### Custom expiration of requests 
+#### Custom expiration of requests
 In default, requests will expire in 600 seconds.
 You can use custom expirations for each request.
 

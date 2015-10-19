@@ -127,7 +127,7 @@ module Idcf
       def send!(method, resource, parameters = {}, headers = {})
         response = send(method, resource, parameters, headers)
         unless response.success?
-          fail(
+          raise(
             ApiError,
             "HTTP status code: #{response.status}, " \
             "Error message: #{response.message}, " \

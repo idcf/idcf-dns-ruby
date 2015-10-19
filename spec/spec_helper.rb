@@ -17,8 +17,8 @@ if File.exist?(dotenv_path)
   Dotenv.load(dotenv_path)
 end
 
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'idcf/dns'
+$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
+require "idcf/dns"
 
 PREFIX = rand(16**8).to_s(16)
 ZONES = []

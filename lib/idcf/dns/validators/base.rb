@@ -8,7 +8,7 @@ module Idcf
         class_attribute :valid_attributes
 
         class << self
-          # Validate requeste attributes.
+          # Validate request attributes.
           # If there are invalid attributes, error occurs.
           #
           # @param attributes [Hash] request attributes

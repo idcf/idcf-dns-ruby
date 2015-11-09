@@ -18,14 +18,22 @@ module Idcf
         # @example
         #   response =
         #       client.create_record(
-        #           "1eeb34ef-0380-455a-bab2-6433d75ad6a4",
+        #           "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
         #           name: "www.foobar.example.com",
         #           type: "A",
         #           content: "8.8.8.8",
         #           ttl: 3600
-        #       )
+        #           )
         #
-        #   response.uuid #=> uuid of a new record
+        #   response.body #=>
+        #     {"uuid"=>"40d5f26f-02bd-4fb1-b363-323675772289",
+        #      "name"=>"www.foobar.example.com",
+        #      "type"=>"A",
+        #      "content"=>"8.8.8.8",
+        #      "ttl"=>3600,
+        #      "created_at"=>"2015-11-09T11:43:50+09:00",
+        #      "updated_at"=>nil,
+        #      "priority"=>nil}
         def create_record(zone_uuid, attributes, headers = {})
           Validators::Record.validate_attributes!(attributes, :create)
           post!("zones/#{zone_uuid}/records", attributes, headers)
@@ -40,11 +48,14 @@ module Idcf
         # @example
         #   response =
         #       client.delete_record(
-        #           "429fcc21-9f9c-4769-8def-794290c13764",
-        #           "f8ecf837-2618-4c8d-a9b0-aee9c71adaa2"
+        #           "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
+        #           "d612aabb-3fea-471a-8712-586f1ac9c29c"
         #       )
         #
+        #   response.body #=> {}
+        #
         #   response.status #=> 200
+
         def delete_record(zone_uuid, uuid, headers = {})
           delete!("zones/#{zone_uuid}/records/#{uuid}", {}, headers)
         end
@@ -58,19 +69,19 @@ module Idcf
         # @example
         #   response =
         #       client.get_record(
-        #           "429fcc21-9f9c-4769-8def-794290c13764",
-        #           "f8ecf837-2618-4c8d-a9b0-aee9c71adaa2"
+        #         "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
+        #         "d612aabb-3fea-471a-8712-586f1ac9c29c"
         #       )
         #
         #   response.body #=>
-        #   {"uuid"=>"a7c1ad9a-b8c2-4d27-a848-d3c488c6faa4",
-        #    "name"=>"www.foobar.example.com",
-        #    "type"=>"A",
-        #    "content"=>"8.8.8.8",
-        #    "ttl"=>3600,
-        #    "created_at"=>"2015-11-04T16:14:44+09:00",
-        #    "updated_at"=>nil,
-        #    "priority"=>nil}
+        #     {"uuid"=>"ecacc77f-e678-4f29-b6dd-6bec79c172a1",
+        #      "name"=>"www.foobar.example.com",
+        #      "type"=>"A",
+        #      "content"=>"8.8.8.8",
+        #      "ttl"=>3600,
+        #      "created_at"=>"2015-11-09T16:07:21+09:00",
+        #      "updated_at"=>nil,
+        #      "priority"=>nil}
         def get_record(zone_uuid, uuid, headers = {})
           get!("zones/#{zone_uuid}/records/#{uuid}", {}, headers)
         end
@@ -81,48 +92,56 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.list_records("1eeb34ef-0380-455a-bab2-6433d75ad6a4")
+        #       client.list_records("ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f")
         #
         #   response.body #=>
-        #   [{"uuid"=>"e8866e73-c843-484f-869a-62ba8301cf72",
-        #     "name"=>"foobar.example.com",
-        #     "type"=>"SOA",
-        #     "content"=>
-        #         {"dns"=>"ns01.idcfcloud.com",
-        #          "email"=>"foobar.example.com.",
-        #          "serial"=>5,
-        #          "refresh"=>10800,
-        #          "retry"=>3600,
-        #          "expire"=>604800,
-        #          "ttl"=>3600},
-        #     "ttl"=>3600,
-        #     "created_at"=>"2015-10-30T17:41:10+09:00",
-        #     "updated_at"=>"2015-11-04T16:14:44+09:00",
-        #     "priority"=>nil},
-        #    {"uuid"=>"fee48cb8-5aff-4fc9-9010-1033919c7e02",
-        #     "name"=>"foobar.example.com",
-        #     "type"=>"NS",
-        #     "content"=>"ns01.idcfcloud.com",
-        #     "ttl"=>3600,
-        #     "created_at"=>"2015-10-30T17:41:10+09:00",
-        #     "updated_at"=>nil,
-        #     "priority"=>nil},
-        #    {"uuid"=>"08af90fe-380b-4553-ae79-ad8630f3dfa3",
-        #     "name"=>"foobar.example.com",
-        #     "type"=>"NS",
-        #     "content"=>"ns02.idcfcloud.com",
-        #     "ttl"=>3600,
-        #     "created_at"=>"2015-10-30T17:41:10+09:00",
-        #     "updated_at"=>nil,
-        #     "priority"=>nil},
-        #    {"uuid"=>"f349b480-1cbe-4080-8fd7-b8fb8f219b3a",
-        #     "name"=>"foobar.example.com",
-        #     "type"=>"NS",
-        #     "content"=>"ns03.idcfcloud.com",
-        #     "ttl"=>3600,
-        #     "created_at"=>"2015-10-30T17:41:10+09:00",
-        #     "updated_at"=>nil,
-        #     "priority"=>nil}]
+        #     [{"uuid"=>"9fae4a12-319c-4afc-ac33-4542ef79dd0b",
+        #       "name"=>"foobar.example.com",
+        #       "type"=>"SOA",
+        #       "content"=>
+        #        {"dns"=>"ns01.idcfcloud.com",
+        #         "email"=>"foobar.example.com.",
+        #         "serial"=>4,
+        #         "refresh"=>10800,
+        #         "retry"=>3600,
+        #         "expire"=>604800,
+        #         "ttl"=>3600},
+        #       "ttl"=>3600,
+        #       "created_at"=>"2015-11-09T13:24:58+09:00",
+        #       "updated_at"=>"2015-11-09T16:07:21+09:00",
+        #       "priority"=>nil},
+        #      {"uuid"=>"f61a75b7-8e9c-4e69-a91a-6e6aa90c2990",
+        #       "name"=>"foobar.example.com",
+        #       "type"=>"NS",
+        #       "content"=>"ns01.idcfcloud.com",
+        #       "ttl"=>3600,
+        #       "created_at"=>"2015-11-09T13:24:58+09:00",
+        #       "updated_at"=>nil,
+        #       "priority"=>nil},
+        #      {"uuid"=>"0195fe5d-7cff-4f94-8886-a13bb0f609b4",
+        #       "name"=>"foobar.example.com",
+        #       "type"=>"NS",
+        #       "content"=>"ns02.idcfcloud.com",
+        #       "ttl"=>3600,
+        #       "created_at"=>"2015-11-09T13:24:58+09:00",
+        #       "updated_at"=>nil,
+        #       "priority"=>nil},
+        #      {"uuid"=>"0bdc7d49-b1aa-4455-903f-35dc3c4338be",
+        #       "name"=>"foobar.example.com",
+        #       "type"=>"NS",
+        #       "content"=>"ns03.idcfcloud.com",
+        #       "ttl"=>3600,
+        #       "created_at"=>"2015-11-09T13:24:58+09:00",
+        #       "updated_at"=>nil,
+        #       "priority"=>nil},
+        #      {"uuid"=>"ecacc77f-e678-4f29-b6dd-6bec79c172a1",
+        #       "name"=>"www.foobar.example.com",
+        #       "type"=>"A",
+        #       "content"=>"8.8.8.8",
+        #       "ttl"=>3600,
+        #       "created_at"=>"2015-11-09T16:07:21+09:00",
+        #       "updated_at"=>nil,
+        #       "priority"=>nil}]
         def list_records(zone_uuid, headers = {})
           get!("zones/#{zone_uuid}/records", {}, headers)
         end
@@ -143,20 +162,20 @@ module Idcf
         # @example
         #   response =
         #       client.update_record(
-        #           "73e4847f-4167-463a-91e4-39c118eaf6d3",
-        #           "7c8ec697-636d-46a5-ad8c-e7f58484a8d5",
-        #           content: "210.140.158.1"
+        #         "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
+        #         "d612aabb-3fea-471a-8712-586f1ac9c29c",
+        #         content: "6.6.6.6"
         #       )
         #
         #   response.body #=>
-        #   {"uuid"=>"7c8ec697-636d-46a5-ad8c-e7f58484a8d5",
-        #    "name"=>"foobar.example.com",
-        #    "type"=>"A",
-        #    "content"=>"210.140.158.1",
-        #    "ttl"=>3600,
-        #    "created_at"=>"2015-11-04T16:14:44+09:00",
-        #    "updated_at"=>"2015-11-04T16:54:29+09:00",
-        #    "priority"=>nil}
+        #     {"uuid"=>"ecacc77f-e678-4f29-b6dd-6bec79c172a1",
+        #      "name"=>"www.foobar.example.com",
+        #      "type"=>"A",
+        #      "content"=>"6.6.6.6",
+        #      "ttl"=>3600,
+        #      "created_at"=>"2015-11-09T16:07:21+09:00",
+        #      "updated_at"=>"2015-11-09T16:22:17+09:00",
+        #      "priority"=>nil}
         def update_record(zone_uuid, uuid, attributes, headers = {})
           Validators::Record.validate_attributes!(attributes, :update)
           put!("zones/#{zone_uuid}/records/#{uuid}", attributes, headers)

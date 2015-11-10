@@ -14,12 +14,12 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #        client.create_zone(
-        #           name: "foobar.example.com",
-        #           email: "foobar@example.com",
-        #           description: "",
-        #           default_ttl: 600
-        #         )
+        #     client.create_zone(
+        #       name: "foobar.example.com",
+        #       email: "foobar@example.com",
+        #       description: "",
+        #       default_ttl: 600
+        #     )
         #
         #   response.body #=>
         #     {"uuid"=>"384178f5-58a5-4f3c-9607-5e189ab2990d",
@@ -81,7 +81,7 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.delete_zone("83f55e72-e3fa-4961-89b3-99ee43617b93")
+        #     client.delete_zone("83f55e72-e3fa-4961-89b3-99ee43617b93")
         #
         #   response.body #=> {}
         #
@@ -97,7 +97,7 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.get_zone("b19e8211-e492-425d-b66a-7642dc2ff8fb")
+        #     client.get_zone("b19e8211-e492-425d-b66a-7642dc2ff8fb")
         #
         #   response.body #=>
         #     {"uuid"=>"b19e8211-e492-425d-b66a-7642dc2ff8fb",
@@ -165,7 +165,7 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.list_zones
+        #     client.list_zones
         #
         #   response.body #=>
         #     [{"uuid"=>"384178f5-58a5-4f3c-9607-5e189ab2990d",
@@ -189,11 +189,11 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.update_zone(
+        #     client.update_zone(
         #       "384178f5-58a5-4f3c-9607-5e189ab2990d",
         #       description: "Change description",
         #       default_ttl: 3600
-        #       )
+        #     )
         #
         #   response.body #=>
         #     {"uuid"=>"384178f5-58a5-4f3c-9607-5e189ab2990d",

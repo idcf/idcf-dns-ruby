@@ -17,13 +17,13 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.create_record(
-        #           "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
-        #           name: "www.foobar.example.com",
-        #           type: "A",
-        #           content: "8.8.8.8",
-        #           ttl: 3600
-        #           )
+        #     client.create_record(
+        #       "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
+        #       name: "www.foobar.example.com",
+        #       type: "A",
+        #       content: "8.8.8.8",
+        #       ttl: 3600
+        #     )
         #
         #   response.body #=>
         #     {"uuid"=>"40d5f26f-02bd-4fb1-b363-323675772289",
@@ -47,15 +47,14 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.delete_record(
-        #           "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
-        #           "d612aabb-3fea-471a-8712-586f1ac9c29c"
-        #       )
+        #     client.delete_record(
+        #       "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
+        #       "d612aabb-3fea-471a-8712-586f1ac9c29c"
+        #     )
         #
         #   response.body #=> {}
         #
         #   response.status #=> 200
-
         def delete_record(zone_uuid, uuid, headers = {})
           delete!("zones/#{zone_uuid}/records/#{uuid}", {}, headers)
         end
@@ -68,10 +67,10 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.get_record(
-        #         "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
-        #         "d612aabb-3fea-471a-8712-586f1ac9c29c"
-        #       )
+        #     client.get_record(
+        #       "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
+        #       "d612aabb-3fea-471a-8712-586f1ac9c29c"
+        #     )
         #
         #   response.body #=>
         #     {"uuid"=>"ecacc77f-e678-4f29-b6dd-6bec79c172a1",
@@ -92,7 +91,7 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.list_records("ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f")
+        #     client.list_records("ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f")
         #
         #   response.body #=>
         #     [{"uuid"=>"9fae4a12-319c-4afc-ac33-4542ef79dd0b",
@@ -161,11 +160,11 @@ module Idcf
         # @return [Response] HTTP response object
         # @example
         #   response =
-        #       client.update_record(
-        #         "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
-        #         "d612aabb-3fea-471a-8712-586f1ac9c29c",
-        #         content: "6.6.6.6"
-        #       )
+        #     client.update_record(
+        #       "ddcd8dbf-8d99-4f49-9958-7dd9a0bfb67f",
+        #       "d612aabb-3fea-471a-8712-586f1ac9c29c",
+        #       content: "6.6.6.6"
+        #     )
         #
         #   response.body #=>
         #     {"uuid"=>"ecacc77f-e678-4f29-b6dd-6bec79c172a1",

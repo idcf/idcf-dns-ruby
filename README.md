@@ -49,7 +49,7 @@ response[0]       #=> zone1
 ```
 
 #### Zones
-##### Create new zone
+##### Create a new zone
 ```ruby
 response =
   client.create_zone(
@@ -74,18 +74,18 @@ zone["name"]         #=> "foobar.example.com"
 zone["records"].size #=> 3
 ```
 
-##### Update zone
+##### Update a zone
 ```ruby
 client.update_zone(zone_uuid, description: "Updated")
 ```
 
-##### Delete zone
+##### Delete a zone
 ```ruby
 client.delete_zone(zone_uuid)
 ```
 
 #### Records
-##### Create new record
+##### Create a new record
 ```ruby
 response =
   client.create_record(
@@ -110,12 +110,12 @@ record = client.get_record(zone_uuid, record_uuid).body
 record["name"] #=> "baz.foobar.example.com"
 ```
 
-##### Update record
+##### Update a record
 ```ruby
 client.update_record(zone_uuid, record_uuid, content: "210.140.158.1")
 ```
 
-##### Delete record
+##### Delete a record
 ```ruby
 client.delete_record(zone_uuid, record_uuid)
 ```

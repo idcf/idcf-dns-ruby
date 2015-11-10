@@ -69,6 +69,8 @@ module Idcf
         #         "priority"=>nil}],
         #      "description"=>"",
         #      "authenticated"=>false}
+        #
+        #   response.uuid #=> "384178f5-58a5-4f3c-9607-5e189ab2990d"
         def create_zone(attributes, headers = {})
           Validators::Zone.validate_attributes!(attributes, :create)
           post!("zones", attributes, headers)

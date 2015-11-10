@@ -34,6 +34,8 @@ module Idcf
         #      "created_at"=>"2015-11-09T11:43:50+09:00",
         #      "updated_at"=>nil,
         #      "priority"=>nil}
+        #
+        #   response.uuid #=> "40d5f26f-02bd-4fb1-b363-323675772289"
         def create_record(zone_uuid, attributes, headers = {})
           Validators::Record.validate_attributes!(attributes, :create)
           post!("zones/#{zone_uuid}/records", attributes, headers)

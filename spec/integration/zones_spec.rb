@@ -3,15 +3,31 @@ describe Idcf::Dns::ClientExtensions::Zone do
 
   describe "#create_zone" do
     let(:response) { client.create_zone(attributes) }
-    after { ZONES << response.uuid }
 
     context "when valid request" do
       let(:attributes) { zone_attributes }
+      after { ZONES << response.uuid }
 
       it do
         expect(response.status).to eq 201
         expect(response.success?).to be_truthy
         expect(response.uuid).not_to be nil
+      end
+    end
+
+    context "when invalid request with unnecessary attributes" do
+      let(:attributes) { zone_attributes( invalid: "" ) }
+
+      it do
+        expect{ client.create_zone(attributes) }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
+      end
+    end
+
+    context "when invalid request with missing attributes" do
+      let(:attributes) { zone_attributes.delete_if{ |k, v| k == :default_ttl} }
+
+      it do
+        expect{ client.create_zone(attributes) }.to raise_error(Idcf::Dns::MissingAttribute)
       end
     end
   end

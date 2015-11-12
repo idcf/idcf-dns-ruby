@@ -15,6 +15,22 @@ describe Idcf::Dns::ClientExtensions::Record do
         expect(response.uuid).not_to be nil
       end
     end
+
+    context "when invalid request with unnecessary attributes" do
+      let(:attributes) { record_attributes(name: "#{rand(16**8).to_s(16)}.#{zone['name']}", invalid: "" ) }
+
+      it do
+        expect{ client.create_record(zone_uuid, attributes) }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
+      end
+    end
+
+    context "when invalid request with missing attribute" do
+      let(:attributes) { record_attributes.delete_if { |k, v| v == :name } }
+
+      it do
+        expect{ client.create_record(zone_uuid, attributes) }.to raise_error(Idcf::Dns::MissingAttribute)
+      end
+    end
   end
 
   describe "#delete_record" do

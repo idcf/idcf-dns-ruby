@@ -16,18 +16,18 @@ describe Idcf::Dns::ClientExtensions::Zone do
     end
 
     context "when invalid request with unnecessary attributes" do
-      let(:attributes) { zone_attributes( invalid: "" ) }
+      let(:attributes) { zone_attributes(invalid: "") }
 
       it do
-        expect{ client.create_zone(attributes) }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
+        expect { response }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
       end
     end
 
     context "when invalid request with missing attributes" do
-      let(:attributes) { zone_attributes.delete_if{ |k, v| k == :default_ttl} }
+      let(:attributes) { zone_attributes.delete_if { |k, v| k == :default_ttl } }
 
       it do
-        expect{ client.create_zone(attributes) }.to raise_error(Idcf::Dns::MissingAttribute)
+        expect { response }.to raise_error(Idcf::Dns::MissingAttribute)
       end
     end
   end
@@ -48,7 +48,7 @@ describe Idcf::Dns::ClientExtensions::Zone do
       before { client.delete_zone(uuid) }
 
       it do
-        expect{ client.delete_zone(uuid) }.to raise_error(Idcf::Dns::ApiError)
+        expect { client.delete_zone(uuid) }.to raise_error(Idcf::Dns::ApiError)
       end
     end
   end

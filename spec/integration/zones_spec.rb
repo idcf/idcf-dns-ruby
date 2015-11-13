@@ -33,14 +33,22 @@ describe Idcf::Dns::ClientExtensions::Zone do
   end
 
   describe "#delete_zone" do
+    before { ZONES << client.create_zone(zone_attributes).uuid }
     let(:response) { client.delete_zone(uuid) }
+    let(:uuid) { ZONES.pop }
 
     context "when valid request" do
-      let(:uuid) { ZONES.pop }
-
       it "should succeed" do
         expect(response.status).to eq 200
         expect(response.success?).to be_truthy
+      end
+    end
+
+    context "when deleting deleted zone" do
+      before { client.delete_zone(uuid) }
+
+      it do
+        expect{ client.delete_zone(uuid) }.to raise_error(Idcf::Dns::ApiError)
       end
     end
   end

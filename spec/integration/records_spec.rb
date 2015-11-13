@@ -35,13 +35,20 @@ describe Idcf::Dns::ClientExtensions::Record do
 
   describe "#delete_record" do
     let(:response) { client.delete_record(zone_uuid, uuid) }
+    let(:uuid) { client.create_record(zone_uuid, attributes).uuid }
 
     context "when valid request" do
-      let(:uuid) { client.create_record(zone_uuid, attributes).uuid }
-
       it do
         expect(response.status).to eq 200
         expect(response.success?).to be_truthy
+      end
+    end
+
+    context "when deleting deleted record" do
+      before { client.delete_record(zone_uuid, uuid) }
+
+      it do
+        expect{ client.delete_record(zone_uuid, uuid) }.to raise_error(Idcf::Dns::ApiError)
       end
     end
   end

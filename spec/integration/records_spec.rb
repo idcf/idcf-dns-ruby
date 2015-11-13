@@ -17,18 +17,20 @@ describe Idcf::Dns::ClientExtensions::Record do
     end
 
     context "when invalid request with unnecessary attributes" do
-      let(:invalid_attributes) { attributes.merge({invalid: "" }) }
+      let(:invalid_attributes) { attributes.merge(invalid: "") }
+      let(:response) { client.create_record(zone_uuid, invalid_attributes) }
 
       it do
-        expect{ client.create_record(zone_uuid, invalid_attributes) }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
+        expect { response }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
       end
     end
 
     context "when invalid request with missing attributes" do
       let(:attributes) { record_attributes.delete_if { |k, v| v == :name } }
+      let(:response) { client.create_record(zone_uuid, attributes) }
 
       it do
-        expect{ client.create_record(zone_uuid, attributes) }.to raise_error(Idcf::Dns::MissingAttribute)
+        expect { response }.to raise_error(Idcf::Dns::MissingAttribute)
       end
     end
   end
@@ -48,7 +50,7 @@ describe Idcf::Dns::ClientExtensions::Record do
       before { client.delete_record(zone_uuid, uuid) }
 
       it do
-        expect{ client.delete_record(zone_uuid, uuid) }.to raise_error(Idcf::Dns::ApiError)
+        expect { client.delete_record(zone_uuid, uuid) }.to raise_error(Idcf::Dns::ApiError)
       end
     end
   end

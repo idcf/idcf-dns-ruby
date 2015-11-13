@@ -17,10 +17,10 @@ describe Idcf::Dns::ClientExtensions::Record do
     end
 
     context "when invalid request with unnecessary attributes" do
-      let(:attributes) { record_attributes(name: "#{rand(16**8).to_s(16)}.#{zone['name']}", invalid: "" ) }
+      let(:invalid_attributes) { attributes.merge({invalid: "" }) }
 
       it do
-        expect{ client.create_record(zone_uuid, attributes) }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
+        expect{ client.create_record(zone_uuid, invalid_attributes) }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
       end
     end
 

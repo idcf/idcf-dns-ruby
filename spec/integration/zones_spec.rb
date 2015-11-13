@@ -44,7 +44,7 @@ describe Idcf::Dns::ClientExtensions::Zone do
       end
     end
 
-    context "when deleting deleted zone" do
+    context "when deleting a non-existing zone" do
       before { client.delete_zone(uuid) }
 
       it do

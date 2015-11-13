@@ -24,7 +24,7 @@ describe Idcf::Dns::ClientExtensions::Record do
       end
     end
 
-    context "when invalid request with missing attribute" do
+    context "when invalid request with missing attributes" do
       let(:attributes) { record_attributes.delete_if { |k, v| v == :name } }
 
       it do
@@ -44,7 +44,7 @@ describe Idcf::Dns::ClientExtensions::Record do
       end
     end
 
-    context "when deleting deleted record" do
+    context "when deleting a non-existing record" do
       before { client.delete_record(zone_uuid, uuid) }
 
       it do

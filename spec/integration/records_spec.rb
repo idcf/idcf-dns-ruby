@@ -26,7 +26,7 @@ describe Idcf::Dns::ClientExtensions::Record do
     end
 
     context "when invalid request with missing required attribute" do
-      let(:attributes) { record_attributes.delete_if { |k, v| v == :name } }
+      let(:attributes) { record_attributes }
 
       it do
         expect { response }.to raise_error(Idcf::Dns::MissingAttribute)

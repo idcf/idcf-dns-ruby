@@ -16,7 +16,7 @@ describe Idcf::Dns::ClientExtensions::Zone do
     end
 
     context "when invalid request with unnecessary attributes" do
-      let(:attributes) { zone_attributes(invalid: "") }
+      let(:attributes) { zone_attributes(unnecessary: "") }
 
       it do
         expect { response }.to raise_error(Idcf::Dns::UnnecessaryAttribute)

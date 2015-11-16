@@ -17,7 +17,7 @@ describe Idcf::Dns::ClientExtensions::Record do
     end
 
     context "when invalid request with unnecessary attributes" do
-      let(:invalid_attributes) { attributes.merge(invalid: "") }
+      let(:invalid_attributes) { attributes.merge(unnecessary: "") }
       let(:response) { client.create_record(zone_uuid, invalid_attributes) }
 
       it do

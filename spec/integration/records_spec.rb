@@ -25,7 +25,7 @@ describe Idcf::Dns::ClientExtensions::Record do
       end
     end
 
-    context "when invalid request with missing attributes" do
+    context "when invalid request with missing required attribute" do
       let(:attributes) { record_attributes.delete_if { |k, v| v == :name } }
       let(:response) { client.create_record(zone_uuid, attributes) }
 

@@ -46,7 +46,7 @@ describe Idcf::Dns::ClientExtensions::Record do
     end
 
     context "when deleting a non-existing record" do
-      before { client.delete_record(zone_uuid, uuid) }
+      let(:uuid) { random_uuid }
 
       it do
         expect { client.delete_record(zone_uuid, uuid) }.to raise_error(Idcf::Dns::ApiError)

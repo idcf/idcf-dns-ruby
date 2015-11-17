@@ -24,7 +24,7 @@ describe Idcf::Dns::ClientExtensions::Zone do
     end
 
     context "when invalid request with missing required attribute" do
-      let(:attributes) { zone_attributes.delete_if { |k, v| k == :default_ttl } }
+      let(:attributes) { zone_attributes.delete_if { |k, _| k == :default_ttl } }
 
       it do
         expect { response }.to raise_error(Idcf::Dns::MissingAttribute)

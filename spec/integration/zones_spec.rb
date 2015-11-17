@@ -45,7 +45,7 @@ describe Idcf::Dns::ClientExtensions::Zone do
     end
 
     context "when deleting a non-existing zone" do
-      before { client.delete_zone(uuid) }
+      let(:uuid) { random_uuid }
 
       it do
         expect { client.delete_zone(uuid) }.to raise_error(Idcf::Dns::ApiError)

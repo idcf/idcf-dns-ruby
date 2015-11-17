@@ -15,17 +15,41 @@ describe Idcf::Dns::ClientExtensions::Record do
         expect(response.uuid).not_to be nil
       end
     end
+
+    context "when invalid request with unnecessary attributes" do
+      let(:invalid_attributes) { attributes.merge(unnecessary: "") }
+      let(:response) { client.create_record(zone_uuid, invalid_attributes) }
+
+      it do
+        expect { response }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
+      end
+    end
+
+    context "when invalid request with missing required attribute" do
+      let(:attributes) { record_attributes }
+
+      it do
+        expect { response }.to raise_error(Idcf::Dns::MissingAttribute)
+      end
+    end
   end
 
   describe "#delete_record" do
     let(:response) { client.delete_record(zone_uuid, uuid) }
+    let(:uuid) { client.create_record(zone_uuid, attributes).uuid }
 
     context "when valid request" do
-      let(:uuid) { client.create_record(zone_uuid, attributes).uuid }
-
       it do
         expect(response.status).to eq 200
         expect(response.success?).to be_truthy
+      end
+    end
+
+    context "when deleting a non-existing record" do
+      let(:uuid) { random_uuid }
+
+      it do
+        expect { client.delete_record(zone_uuid, uuid) }.to raise_error(Idcf::Dns::ApiError)
       end
     end
   end

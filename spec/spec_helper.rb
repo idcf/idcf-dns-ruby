@@ -4,8 +4,7 @@ SimpleCov.start do
   add_filter "spec"
 end
 
-# SimpleCov.minimum_coverage 90
-SimpleCov.minimum_coverage 85 # temporary setting
+SimpleCov.minimum_coverage 90
 
 if ENV["CI"]
   require "codeclimate-test-reporter"
@@ -61,5 +60,10 @@ shared_context "resources" do
       content: "8.8.8.8",
       ttl: 600
     }.merge(attributes)
+  end
+
+  require "securerandom"
+  def random_uuid
+    SecureRandom.uuid
   end
 end

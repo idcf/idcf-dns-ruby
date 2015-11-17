@@ -3,10 +3,10 @@ describe Idcf::Dns::ClientExtensions::Zone do
 
   describe "#create_zone" do
     let(:response) { client.create_zone(attributes) }
-    after { ZONES << response.uuid }
 
     context "when valid request" do
       let(:attributes) { zone_attributes }
+      after { ZONES << response.uuid }
 
       it do
         expect(response.status).to eq 201
@@ -14,17 +14,41 @@ describe Idcf::Dns::ClientExtensions::Zone do
         expect(response.uuid).not_to be nil
       end
     end
+
+    context "when invalid request with unnecessary attributes" do
+      let(:attributes) { zone_attributes(unnecessary: "") }
+
+      it do
+        expect { response }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
+      end
+    end
+
+    context "when invalid request with missing required attribute" do
+      let(:attributes) { zone_attributes.delete_if { |k, _| k == :default_ttl } }
+
+      it do
+        expect { response }.to raise_error(Idcf::Dns::MissingAttribute)
+      end
+    end
   end
 
   describe "#delete_zone" do
+    before { ZONES << client.create_zone(zone_attributes).uuid }
     let(:response) { client.delete_zone(uuid) }
+    let(:uuid) { ZONES.pop }
 
     context "when valid request" do
-      let(:uuid) { ZONES.pop }
-
       it "should succeed" do
         expect(response.status).to eq 200
         expect(response.success?).to be_truthy
+      end
+    end
+
+    context "when deleting a non-existing zone" do
+      let(:uuid) { random_uuid }
+
+      it do
+        expect { client.delete_zone(uuid) }.to raise_error(Idcf::Dns::ApiError)
       end
     end
   end

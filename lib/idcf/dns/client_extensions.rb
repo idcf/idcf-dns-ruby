@@ -7,5 +7,4 @@ module Idcf
 end
 
 require "idcf/dns/client_extensions/record"
-require "idcf/dns/client_extensions/template"
 require "idcf/dns/client_extensions/zone"

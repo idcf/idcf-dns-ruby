@@ -30,11 +30,6 @@ auth_args = {
   verify_ssl: ENV["VERIFY_SSL"] != "false"
 }
 
-require "securerandom"
-def random_uuid
-  SecureRandom.uuid
-end
-
 RSpec.configure do |config|
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
@@ -65,5 +60,10 @@ shared_context "resources" do
       content: "8.8.8.8",
       ttl: 600
     }.merge(attributes)
+  end
+
+  require "securerandom"
+  def random_uuid
+    SecureRandom.uuid
   end
 end

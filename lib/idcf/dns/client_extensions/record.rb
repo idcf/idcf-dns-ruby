@@ -7,11 +7,11 @@ module Idcf
         #
         # @param zone_uuid [String] UUID of zone
         # @param attributes [Hash] request attributes
-        # @option attributes [String] :name name of record
-        # @option attributes [String] :type type of record
+        # @option attributes [String] :name name of record (required)
+        # @option attributes [String] :type type of record (required)
         #   (A, AAAA, CNAME, MX, TXT or SRV)
-        # @option attributes [String] :content content of record
-        # @option attributes [Integer] :ttl TTL
+        # @option attributes [String] :content content of record (required)
+        # @option attributes [Integer] :ttl TTL (required)
         # @option attributes [Integer] :priority priority of record
         # @param headers [Hash] HTTP request headers
         # @return [Response] HTTP response object

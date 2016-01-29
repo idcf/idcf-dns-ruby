@@ -22,6 +22,10 @@ Or install it yourself as:
 
     $ gem install idcf-dns
 
+## Dependencies
+
+* Ruby 2.1.0 or higher
+
 ## Usage
 ### Basic usage
 #### Client

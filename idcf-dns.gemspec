@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop"
   spec.add_development_dependency "simplecov"
 
-  spec.add_dependency "activesupport", "~> 4.2.3"
-  spec.add_dependency "faraday", "~> 0.9.1"
-  spec.add_dependency "faraday_middleware", "~> 0.10.0"
+  spec.add_dependency "activesupport"
+  spec.add_dependency "faraday"
+  spec.add_dependency "faraday_middleware"
 end

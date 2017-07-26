@@ -258,6 +258,28 @@ module Idcf
           put!("zones/#{uuid}", attributes, headers)
         end
 
+        # Get a verify token.
+        #
+        # @param uuid [String] UUID of target zone
+        # @param headers [Hash] HTTP request headers
+        # @return [Response] HTTP response object
+        # @example
+        #   TODO
+        def get_token(uuid, headers = {})
+          get!("zones/#{uuid}/token", {}, headers)
+        end
+
+        # Verify a zone.
+        #
+        # @param uuid [String] UUID of target zone
+        # @param headers [Hash] HTTP request headers
+        # @return [Response] HTTP response object
+        # @example
+        #   TODO
+        def verify_zone(uuid, headers = {})
+          post!("zones/#{uuid}/verify", {}, headers)
+        end
+
         # Get a zone object.
         #
         # @param uuid [String] UUID of target zone

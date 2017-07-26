@@ -12,7 +12,7 @@ module Idcf
           template_uuid: { type: String, create: :optional },
           created_at:    { type: String },
           updated_at:    { type: String },
-          records:       { type: Array, reader: false }
+          records:       { type: Array, reader: false },
         }
       end
     end

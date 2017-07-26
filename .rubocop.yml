@@ -1,7 +1,6 @@
 AllCops:
   Exclude:
-    - "Gemfile"
-    - "*.gemspec"
+    - "vendor/**/*"
   DisplayCopNames: true
 
 Documentation:
@@ -86,3 +85,8 @@ Style/StringLiterals:
 
 Style/TrailingCommaInLiteral:
    EnforcedStyleForMultiline: comma
+
+Metrics/BlockLength:
+  Exclude:
+    - "idcf-your.gemspec"
+    - "spec/**/*"

@@ -21,13 +21,13 @@ $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "idcf/dns"
 
 PREFIX = rand(16**8).to_s(16)
-ZONES = []
+ZONES = [].freeze
 
 auth_args = {
   api_key: ENV["IDCF_API_KEY"],
   secret_key: ENV["IDCF_SECRET_KEY"],
   host: ENV["DNS_API_HOST"] || "dns.idcfcloud.com",
-  verify_ssl: ENV["VERIFY_SSL"] != "false"
+  verify_ssl: ENV["VERIFY_SSL"] != "false",
 }
 
 RSpec.configure do |config|
@@ -50,7 +50,7 @@ shared_context "resources" do
       name: "rspec-#{PREFIX}-#{ZONES.size}.idcf-dns-ruby.jp",
       email: "rspec@idcf-dns-ruby.jp",
       description: "For idcf-dns-ruby rspec",
-      default_ttl: 600
+      default_ttl: 600,
     }.merge(attributes)
   end
 
@@ -58,7 +58,7 @@ shared_context "resources" do
     {
       type: "A",
       content: "8.8.8.8",
-      ttl: 600
+      ttl: 600,
     }.merge(attributes)
   end
 

@@ -48,7 +48,7 @@ module Idcf
         {
           "X-IDCF-Signature" => signature,
           "X-IDCF-APIKEY" => api_key,
-          "X-IDCF-Expires" => expires
+          "X-IDCF-Expires" => expires,
         }
       end
 
@@ -89,7 +89,7 @@ module Idcf
           path,
           api_key,
           expires,
-          ""
+          "",
         ].join("\n")
       end
     end

@@ -10,7 +10,7 @@ module Idcf
           default_ttl: { type: Integer, create: :required, update: :optional },
           created_at:  { type: String },
           updated_at:  { type: String },
-          records:     { type: Array, reader: false }
+          records:     { type: Array, reader: false },
         }
       end
     end

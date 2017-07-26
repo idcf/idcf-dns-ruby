@@ -12,7 +12,7 @@ module Idcf
           ttl:         { type: Integer, create: :required, update: :optional },
           priority:    { type: [Integer, NilClass], create: :optional },
           created_at:  { type: String },
-          updated_at:  { type: String }
+          updated_at:  { type: String },
         }
       end
     end

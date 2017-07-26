@@ -264,7 +264,19 @@ module Idcf
         # @param headers [Hash] HTTP request headers
         # @return [Response] HTTP response object
         # @example
-        #   TODO
+        #   response =
+        #     client.get_token(
+        #       "384178f5-58a5-4f3c-9607-5e189ab2990d"
+        #     )
+        #
+        #   response.body #=>
+        #     {"TXT"=>["idcf-dns-token=0123456789abcdef0123456789abcdef"],
+        #       "NS"=>[
+        #         "0123456789abcdef0123456789abcdef.dns-verify.idc.jp",
+        #         "ns01.idcfcloud.com",
+        #         "ns02.idcfcloud.com",
+        #         "ns03.idcfcloud.com"
+        #       ]}
         def get_token(uuid, headers = {})
           get!("zones/#{uuid}/token", {}, headers)
         end
@@ -275,7 +287,13 @@ module Idcf
         # @param headers [Hash] HTTP request headers
         # @return [Response] HTTP response object
         # @example
-        #   TODO
+        #   response =
+        #     client.verify_zone(
+        #       "384178f5-58a5-4f3c-9607-5e189ab2990d"
+        #     )
+        #
+        #   response.body #=>
+        #     {}
         def verify_zone(uuid, headers = {})
           post!("zones/#{uuid}/verify", {}, headers)
         end

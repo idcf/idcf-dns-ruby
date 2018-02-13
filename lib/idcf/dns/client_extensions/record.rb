@@ -189,7 +189,7 @@ module Idcf
         # @param headers [Hash] HTTP request headers
         # @return [Resources::Record] a record object
         def record(zone_uuid, uuid, headers = {})
-          Resources::Record.new(self, get_record(uuid, zone_uuid, headers).body)
+          Resources::Record.new(self, get_record(zone_uuid, uuid, headers).body)
         end
 
         # Get an array of existing record objects.

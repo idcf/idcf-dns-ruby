@@ -7,8 +7,7 @@ require "idcf/dns/version"
 Gem::Specification.new do |spec|
   spec.name          = "idcf-dns"
   spec.version       = Idcf::Dns::VERSION
-  spec.authors       = ["nownabe"]
-  spec.email         = ["nownabe@gmail.com"]
+  spec.authors       = ["IDC Frontier Inc."]
 
   spec.summary       = "A Ruby client for IDCF Cloud DNS Service."
   spec.homepage      = "https://github.com/idcf/idcf-dns-ruby"
@@ -20,16 +19,16 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency 'dotenv'
-  spec.add_development_dependency 'bundler', '~> 1.14'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'awesome_print'
+  spec.add_development_dependency "dotenv"
+  spec.add_development_dependency "bundler", "~> 1.14"
+  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "awesome_print"
 
   spec.add_runtime_dependency "activesupport"
   spec.add_runtime_dependency "faraday"
   spec.add_runtime_dependency "faraday_middleware"
 
-  spec.required_ruby_version = '>= 2.1.10'
+  spec.required_ruby_version = ">= 2.1.10"
 end

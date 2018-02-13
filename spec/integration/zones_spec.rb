@@ -1,96 +1,119 @@
+# frozen_string_literal: true
+
 describe Idcf::Dns::ClientExtensions::Zone do
   include_context "resources"
 
-  describe "#create_zone" do
-    let(:response) { client.create_zone(attributes) }
-
-    context "when valid request" do
-      let(:attributes) { zone_attributes }
-      after { ZONES << response.uuid }
-
-      it do
-        expect(response.status).to eq 201
-        expect(response.success?).to be_truthy
-        expect(response.uuid).not_to be nil
-      end
+  context "ゾーン" do
+    example "ゾーンを作成できるか" do
+      response = client.create_zone(zone_params)
+      expect(response.status).to eq 201
+      expect(response.body).to be_truthy
+      expect(response.count).to be_truthy
+      expect(response.uuid).to be_truthy
     end
 
-    context "when invalid request with unnecessary attributes" do
-      let(:attributes) { zone_attributes(unnecessary: "") }
-
-      it do
-        expect { response }.to raise_error(Idcf::Dns::UnnecessaryAttribute)
-      end
+    example "ゾーン一覧を取得できるか" do
+      response = client.list_zones
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+      expect(response.count).to be_truthy
     end
 
-    context "when invalid request with missing required attribute" do
-      let(:attributes) { zone_attributes.delete_if { |k, _| k == :default_ttl } }
-
-      it do
-        expect { response }.to raise_error(Idcf::Dns::MissingAttribute)
-      end
-    end
-  end
-
-  describe "#delete_zone" do
-    before { ZONES << client.create_zone(zone_attributes).uuid }
-    let(:response) { client.delete_zone(uuid) }
-    let(:uuid) { ZONES.pop }
-
-    context "when valid request" do
-      it "should succeed" do
-        expect(response.status).to eq 200
-        expect(response.success?).to be_truthy
-      end
+    example "ゾーン一覧のオブジェクトを取得できるか" do
+      response = client.zones
+      expect(response).to be_truthy
+      expect(response.count).to be_truthy
     end
 
-    context "when deleting a non-existing zone" do
-      let(:uuid) { random_uuid }
-
-      it do
-        expect { client.delete_zone(uuid) }.to raise_error(Idcf::Dns::ApiError)
-      end
+    example "ゾーンを取得できるか" do
+      response = client.get_zone(zone_uuid)
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+      expect(response.count).to be_truthy
+      expect(response.uuid).to be_truthy
     end
-  end
 
-  describe "#get_zone" do
-    before { ZONES << client.create_zone(zone_attributes).uuid }
-    let(:response) { client.get_zone(uuid) }
+    example "ゾーンのオブジェクトを取得できるか" do
+      response = client.zone(zone_uuid)
+      expect(response).to be_truthy
+    end
 
-    context "when valid request" do
-      let(:uuid) { ZONES.last }
+    example "ゾーンの認証情報を取得できるか" do
+      response = client.get_token(zone_uuid)
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+    end
 
-      it do
-        expect(response.status).to eq 200
-        expect(response.success?).to be_truthy
-        expect(response.body).to be_an_instance_of(Hash)
-      end
+    example "ゾーンを認証できるか" do
+      response = client.verify_zone(zone_uuid)
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+    end
+
+    example "ゾーンを変更できるか" do
+      params = {
+        default_ttl: 3600,
+        description: "update",
+      }
+      response = client.update_zone(zone_uuid, params)
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+    end
+
+    example "ゾーンを削除できるか" do
+      response = client.delete_zone(zone_uuid)
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+      expect(response.count).to be_truthy
     end
   end
 
-  describe "#list_zones" do
-    let(:response) { client.list_zones }
-
-    context "when valid request" do
-      it do
-        expect(response.status).to eq 200
-        expect(response.success?).to be_truthy
-        expect(response.body).to be_an_instance_of(Array)
-      end
+  context "ゾーン（パス指定）" do
+    example "ゾーンを作成できるか" do
+      headers = { add: "header" }
+      response = client.post("zones", zone_params, headers)
+      expect(response.status).to eq 201
+      expect(response.body).to be_truthy
     end
-  end
 
-  describe "#update_zone" do
-    let(:response) { client.update_zone(uuid, attributes) }
+    example "ゾーン一覧を取得できるか" do
+      response = client.get("zones")
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+    end
 
-    context "when valid request" do
-      let(:uuid) { ZONES.last }
-      let(:attributes) { { description: "Updated description." } }
+    example "ゾーンを取得できるか" do
+      response = client.get("zones/#{zone_uuid}")
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+    end
 
-      it do
-        expect(response.status).to eq 200
-        expect(response.success?).to be_truthy
-      end
+    example "ゾーンの認証情報を取得できるか" do
+      response = client.get("zones/#{zone_uuid}/token")
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+    end
+
+    example "ゾーンを認証できるか" do
+      response = client.post("zones/#{zone_uuid}/verify")
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+    end
+
+    example "ゾーンを変更できるか" do
+      params = {
+        default_ttl: 3600,
+        description: "update",
+      }
+      response = client.put("zones/#{zone_uuid}", params)
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
+    end
+
+    example "ゾーンを削除できるか" do
+      response = client.delete_zone(zone_uuid)
+      expect(response.status).to eq 200
+      expect(response.body).to be_truthy
     end
   end
 end

@@ -37,7 +37,7 @@ module Idcf
           0
         end
       end
-      alias_method :size, :count
+      alias size count
 
       # Returns error message.
       # When request succeed, this returns nil.

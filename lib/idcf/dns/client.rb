@@ -14,12 +14,13 @@ module Idcf
       #
       # @param [String] api_key API key for IDCF Cloud
       # @param [String] secret_key Secret key for IDCF Cloud
-      def initialize(api_key:,
-                     secret_key:,
-                     host: "dns.idcfcloud.com",
-                     endpoint: "/api/v1",
-                     verify_ssl: true
-                    )
+      def initialize(
+        api_key:,
+        secret_key:,
+        host: "dns.idcfcloud.com",
+        endpoint: "/api/v1",
+        verify_ssl: true
+      )
 
         @api_key    = api_key
         @secret_key = secret_key

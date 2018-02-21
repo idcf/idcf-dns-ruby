@@ -1,8 +1,8 @@
 AllCops:
   Exclude:
-    - "Gemfile"
-    - "*.gemspec"
+    - "vendor/**/*"
   DisplayCopNames: true
+  TargetRubyVersion: 2.1
 
 Documentation:
   Enabled: false
@@ -75,17 +75,19 @@ Style/SignalException:
 Style/SingleLineBlockParams:
   Enabled: false
 
-Style/SpaceAroundOperators:
-  MultiSpaceAllowedForOperators:
-    - "="
-    - "=>"
-    - "||="
+Layout/SpaceAroundOperators:
+  AllowForAlignment: true
 
-Style/SpaceBeforeComma:
+Layout/SpaceBeforeComma:
   Enabled: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-Style/TrailingComma:
-  Enabled: false
+Style/TrailingCommaInLiteral:
+   EnforcedStyleForMultiline: comma
+
+Metrics/BlockLength:
+  Exclude:
+    - "idcf-your.gemspec"
+    - "spec/**/*"

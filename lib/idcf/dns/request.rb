@@ -48,7 +48,8 @@ module Idcf
         {
           "X-IDCF-Signature" => signature,
           "X-IDCF-APIKEY" => api_key,
-          "X-IDCF-Expires" => expires
+          "X-IDCF-Expires" => expires,
+          "User-Agent" => "IDCF DNS API Client v#{VERSION}",
         }
       end
 
@@ -89,7 +90,7 @@ module Idcf
           path,
           api_key,
           expires,
-          ""
+          "",
         ].join("\n")
       end
     end

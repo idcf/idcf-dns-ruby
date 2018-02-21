@@ -9,3 +9,5 @@
 /tmp/
 /.env
 /.idea/
+/vendor/bundle/
+/.rspec_status

@@ -49,7 +49,7 @@ module Idcf
           "X-IDCF-Signature" => signature,
           "X-IDCF-APIKEY" => api_key,
           "X-IDCF-Expires" => expires,
-          "User-Agent" => "IDCF DNS API Client v#{VERSION}",
+          "User-Agent" => "IDCF DNS API Client v#{::Idcf::Dns::VERSION}",
         }
       end
 

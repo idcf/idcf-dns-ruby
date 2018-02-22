@@ -1,4 +1,5 @@
 require "idcf/dns/errors"
+require "idcf/dns/version"
 
 # IDCF Cloud SDK
 module Idcf
